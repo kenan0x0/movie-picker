@@ -28,11 +28,11 @@ def get_popular_movies():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    movie = ""
     if request.method == "POST":
         movie = get_popular_movies()[0][0]["original_title"]
-        return render_template("home.html", movie=movie)
         
-    return render_template("home.html")
+    return render_template("home.html", movie=movie)
 
 
 if __name__ == "__main__":

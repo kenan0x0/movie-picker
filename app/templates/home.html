@@ -8,9 +8,9 @@
     <title>Movie Picker</title>
 </head>
 <body>
-    <form onsubmit="document.getElementById('movie-name').style.display='block'; document.getElementById('movie-name').innerHTML='{{movie}}'" method="POST">
-        <input type="submit" value="Choose movie">
+    <form method="POST">
+        <input onclick="document.getElementById('movie-name').style.display='block'; document.getElementById('movie-name').innerHTML='{{movie}}'" type="submit" value="Choose movie">
     </form>
-    <p id="movie-name" style="display: none;">hello</p>
+    <p id="movie-name" style="display: none;"></p>
 </body>
 </html>
