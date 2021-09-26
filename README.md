@@ -1,1 +1,3 @@
 # movie-picker
+A simple app that picks movies at random because choosing a movie to watch can sometimes take
+longer than actaully watching a movie. This application can reduce the time needed to choose a movie because you won't have any control over the movie that will be picked. All you have to do is pick out of few attributes and the application will automatically pick out a movie for you to watch! Have fun
