@@ -8,9 +8,29 @@
     <title>Movie Picker</title>
 </head>
 <body>
-    <form method="POST">
-        <input onclick="document.getElementById('movie-name').style.display='block'; document.getElementById('movie-name').innerHTML='{{movie}}'" type="submit" value="Choose movie">
-    </form>
-    <p id="movie-name" style="display: none;"></p>
+
+    <h1 id="title">Movie Picker App</h1>
+
+    <div id="container">
+
+        <div class="flex-item">
+            <form class="filters-container" method="POST">
+                <input class="filter" type="text" name="release-year">
+                <select class="filter" name="genres">
+                    <option value="name">name</option>
+                </select>
+                <input class="filter" onclick="document.getElementById('movie-name').style.display='block'; document.getElementById('movie-name').innerHTML='{{movie}}'" type="submit" value="Choose movie">
+            </form>
+        </div>
+
+        <div class="flex-item poster">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="Movie Poster">
+            <p id="movie-name" style="display: none;"></p>
+        </div>
+
+    </div>
+
+
+    
 </body>
 </html>
