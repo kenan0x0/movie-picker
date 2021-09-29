@@ -8,36 +8,38 @@ html{
     display: flex;
     flex-direction: row;
     margin-right: 10px;
-    margin-left: 10px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
 }
 
 .flex-item{
     width: 50%;
+    background-color: navy;
+    margin-left: 10px;
 }
 
-.filters-container{
+.form-filters{
     display: flex;
     flex-direction: column;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    padding: 2rem;
-    background-color: black;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
 }
 
 .filter{
-    width: 500px;
-    margin-top: 10px;
-    border-radius: 10px;
-    height: 5vh;
+    width: 50%;
+    margin: 20px;
+}
+
+
+.poster-in{
+    padding: 20px;
+}
+
+.poster{
+    width: 100%;
+}
+
+.labels{
+    color: white;
 }
 
 #title{

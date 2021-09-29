@@ -26,14 +26,26 @@ def get_popular_movies():
     return all_movies
 
 
+# Function that gets all movie genres with their ids
+def get_all_genres():
+    headers = {"Authorization":f"Bearer {access_token}"}
+    params = {
+        "language":"en-US",
+    }
+
+    genres = requests.get(url=ENTRYPOINT_API_GENRE, headers=headers, params=params).json()["genres"]
+    
+    return genres
+
 @app.route("/", methods=["GET", "POST"])
-def index():
+def home():
+    genres = get_all_genres()
+    print(genres)
     movie = ""
     if request.method == "POST":
         movie = get_popular_movies()[0][0]["original_title"]
         
-    return render_template("home.html", movie=movie)
-
+    return render_template("home.html", geres=genres, movie=movie)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)
