@@ -35,7 +35,12 @@ html{
 }
 
 .poster{
-    width: 100%;
+    width: 600px;
+    height: 900px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
 }
 
 .labels{
@@ -44,4 +49,9 @@ html{
 
 #title{
     text-align: center;
+}
+
+#movie-name{
+    text-align: center;
+    color: white;
 }

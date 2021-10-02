@@ -1,19 +1,31 @@
 from flask import Flask, url_for, redirect, render_template, request
 import os
-from utils import get_all_genres, get_popular_movies
+import random
+from utils import get_popular_movies, get_movie_details
 
 app = Flask(__name__)
 app.debug = True
 app.config["SECRET_KEY"] = os.environ.get("SEC_KEY")
+endpoint_poster = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
 
 @app.route("/", methods=["POST", "GET"])
 def landing_page():
-    genres = get_all_genres()
-    movie = ""
+    all_popular = get_popular_movies()
+
+    initial_movie = random.choice(all_popular)
+    movie = initial_movie["title"]
+    img_url = f"{endpoint_poster}{initial_movie['poster_path']}"
+
     if request.method == "POST":
-        movie = get_popular_movies()[0][0]["original_title"]
-        
-    return render_template("home.html", geres=genres, movie=movie)
+        movies = get_popular_movies()
+        rand_movie = random.choice(movies)
+        movie = rand_movie["title"]
+        img_url = f"{endpoint_poster}{rand_movie['poster_path']}"
+        details = get_movie_details(rand_movie["id"])
+        # print(movies)
+
+    return render_template("home.html", movie=movie, img_url=img_url)
+
 
 @app.errorhandler(404)
 def resource_not_found(e):

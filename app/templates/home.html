@@ -14,29 +14,17 @@
     <div id="container">
         <!-- Item One -->
         <div class="flex-item">
+
             <form class="form-filters" method="POST">
-                
-                <label class="labels" for="release-year">Release Year</label>
-                <input class="filter" type="text" name="release-year">
-                <label class="labels" for="genres">Genres</label>
-                <select class="filter" name="genres">
-                    {% for genre in genres %}
-                        <option value="{{genre}}">{{genre}}</option>
-                    {% endfor %}
-                </select>
-                <input class="filter" onclick="document.getElementById('movie-name').style.display='block'; document.getElementById('movie-name').innerHTML='{{movie}}'" type="submit" value="Choose movie">
+                <input class="filter" type="submit" value="Generate random movie">
             </form>
         </div>
 
         <!-- Item Two -->
         <div class="flex-item poster-in">
-
-            <img class="poster" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="Movie Poster">
+            <p id="movie-name">{{movie}}</p>
+            <img class="poster" src="{{img_url}}" alt="Movie Poster">
         
-        </div>
-
-        <div>
-            <p id="movie-name" style="display: none;"></p>
         </div>
 
     </div>
