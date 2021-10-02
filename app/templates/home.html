@@ -12,21 +12,57 @@
     <h1 id="title">Movie Picker App</h1>
 
     <div id="container">
-        <!-- Item One -->
-        <div class="flex-item">
-
-            <form class="form-filters" method="POST">
-                <input class="filter" type="submit" value="Generate random movie">
+            
+            <form method="POST">
+                <input class="btn btn-hover" type="submit" value="Generate random movie">
             </form>
-        </div>
+            <hr>
+            
 
-        <!-- Item Two -->
-        <div class="flex-item poster-in">
-            <p id="movie-name">{{movie}}</p>
-            <img class="poster" src="{{img_url}}" alt="Movie Poster">
+            <div id="query-results">
+                <div class="res-item">
+                    <p class="heading-res">{{movie}}</p>
+                    <img class="poster" src="{{img_url}}" alt="Movie Poster">
+                </div>
+
+                <div class="res-item">
+                    <p class="heading-res">Duration</p>
+                    <span class="duration">{{duration}}</span>
+                </div>
+
+                <div class="res-item" style="width: 50%;">
+                    <p class="heading-res">Trailer</p>
+                    {% if trailer_link is none %}
+                        <span class="duration">No Trailer Available</span>
+                    {% else %}
+                        <iframe id="trailer-vid" width="420" height="300"
+                            src="{{trailer_link}}" allowfullscreen>
+                        </iframe>
+                    {% endif %}
+                </div>
+
+                <div class="res-item" style="width: 100%;">
+                    <p class="heading-res" style="text-align: left;">Reviews</p>
+                     <div id="reviews-box">
+                        {% if (reviews | length) == 0 %}
+                            <p>No Reviews</p>
+                        {% else %}
+                            {% for review in reviews%}
+                                <div class="card">
+                                    <div class="user-info">
+                                        <img class="propic" src="{{review[1]}}" alt="profile pic of {{review[0]}}">
+                                        <p class="username">{{review[0]}}</p>
+                                    </div>
+                                    <p>Rating of {{review[0]}}: {{review[2]}}</p>
+                                    <p>{{review[3]}}</p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                     </div>
+                </div>
+
+            </div>
         
-        </div>
-
     </div>
 
 

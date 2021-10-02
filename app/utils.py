@@ -33,6 +33,19 @@ def get_movie_details(id):
 
     return requests.get(url=ENDPOINT_API_MOVIE_DETAILS, headers=headers).json()
 
+def get_movie_trailer(id):
+    ENDPOINT_API_MOVIE_DETAILS = f"https://api.themoviedb.org/3/movie/{id}/videos"
+    headers = {"Authorization":f"Bearer {access_token}"}
+
+    return requests.get(url=ENDPOINT_API_MOVIE_DETAILS, headers=headers).json()["results"]
+
+
+def get_movie_reviews(id):
+    ENDPOINT_API_MOVIE_DETAILS = f"https://api.themoviedb.org/3/movie/{id}/reviews"
+    headers = {"Authorization":f"Bearer {access_token}"}
+
+    return requests.get(url=ENDPOINT_API_MOVIE_DETAILS, headers=headers).json()["results"]
+
 
 # Function that gets all movie genres with their ids
 # def get_all_genres():

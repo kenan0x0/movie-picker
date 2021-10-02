@@ -1,57 +1,154 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@600&display=swap');
 html{
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: 'Gemunu Libre', sans-serif;
+    background-color: #272727;
 }
 
-#container{
+#title{
+    text-align: center;
+    color: white;
+}
+
+#query-results{
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-right: 10px;
+    flex-wrap: wrap;
 }
 
-.flex-item{
-    width: 50%;
-    background-color: navy;
-    margin-left: 10px;
+.res-item{
+    width: 25%;
 }
 
-.form-filters{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    justify-content: center;
+#container{
+    width: 85%;
+    background-color: rgba(116, 116, 116, 0.2);
+    border-radius: 5px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
-.filter{
-    width: 50%;
+hr{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.btn-hover {
+    width: 20%;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
     margin: 20px;
-}
-
-
-.poster-in{
-    padding: 20px;
-}
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+  }
+  
+  .btn-hover:focus {
+    outline: none;
+  }
+  
+  .btn-hover.btn {
+      background-image: linear-gradient(
+        to right,
+        #f5ce62,
+        #e43603,
+        #fa7199,
+        #e85a19
+      );
+      box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+    }
 
 .poster{
-    width: 600px;
-    height: 900px;
+    width: 180px;
+    height: 300px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     border-radius: 12px;
 }
 
-.labels{
+.heading-res{
+    font-size: 1.5rem;
     color: white;
-}
-
-#title{
     text-align: center;
 }
 
-#movie-name{
-    text-align: center;
+/* Duration */
+.duration{
+    font-size: 10rem;
     color: white;
+    display: table;
+    margin: 0 auto;
+    border: 5px solid white;
+    border-radius: 30%;
+    padding: 1rem;
+}
+
+#trailer-vid{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#reviews-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #fff;
+    border-radius: 2px;
+    display: inline-block;
+    height: 300px;
+    margin: 1rem;
+    position: relative;
+    width: 300px;
+    overflow: scroll;
+    padding: 0.5rem;
+  }
+
+
+.propic{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.username{
+    padding-left: 10px;
+    padding-top: 20px;
+    font-style: italic;
 }
