@@ -104,12 +104,14 @@
                         {% else %}
                             {% for review in reviews%}
                                 <div class="card">
-                                    <div class="user-info">
-                                        <img class="propic" src="{{review[1]}}" alt="profile pic of {{review[0]}}">
-                                        <p class="username">{{review[0]}}</p>
+                                    <div>
+                                        <div class="user-info">
+                                            <img class="propic" src="{{review[1]}}" alt="profile pic of {{review[0]}}">
+                                            <p class="username">{{review[0]}}</p>
+                                        </div>
+                                        <p class="rating"><i style="color: gold !important;" class="fas fa-star fa-sm"></i> {{review[2]}}</p>
+                                        <p>{{review[3]}}</p>
                                     </div>
-                                    <p class="rating"><i style="color: gold !important;" class="fas fa-star fa-sm"></i> {{review[2]}}</p>
-                                    <p>{{review[3]}}</p>
                                 </div>
                             {% endfor %}
                         {% endif %}
