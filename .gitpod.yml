@@ -5,8 +5,7 @@ tasks:
 
 ports:
   - port: 5000
-    onOpen: open-browser
-
+  
 vscode:
   extensions:
     - ms-python.python

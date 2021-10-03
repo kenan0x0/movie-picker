@@ -2,11 +2,12 @@ from flask import Flask, url_for, redirect, render_template, request
 import os
 import random
 from utils import (
-    get_popular_movies,
+    # get_popular_movies,
     get_movie_details,
     get_movie_trailer,
     get_movie_reviews,
     get_justwatch_movie_details)
+import pickle
 
 app = Flask(__name__)
 app.debug = True
@@ -25,21 +26,50 @@ providers = [8, 10, 119, 72]
 
 @app.route("/", methods=["POST", "GET"])
 def landing_page():
-    all_popular = get_popular_movies()
 
+    # Get all the popular movies
+    with open('app/all_movies.pkl', 'rb') as f:
+        all_popular = pickle.load(f)
+
+    # Select the initial movie to display
     initial_movie = random.choice(all_popular)
+
+    # Get the title of the initial movie
     movie = initial_movie["title"]
+
+    # Get the url of the movie's poster (poster is from themoviedb)
     img_url = f"{endpoint_poster}{initial_movie['poster_path']}"
+
+    # Get more deatils about the selected movie based on its id
     details = get_movie_details(initial_movie["id"])
+
+    # Get the duration of the movie in minutes
     duration = details["runtime"]
+
+    # Get the release year
+    release_date = details["release_date"]
+    print(release_date)
+    print(type(release_date))
+    release_year = release_date[0:release_date.index("-")]
+
+    # Get the genres of the selected movie and add them to a list
+    genres = []
+    for genre in details["genres"]:
+        genres.append(genre["name"])
+    
+    # Get the available videos for the selected movie, add the videos to the list possible_videos
     video_info = get_movie_trailer(initial_movie["id"])
     possible_videos = []
     for vid in video_info:
         possible_videos.append(vid)
+
+    # Genreate the YouTube link of the video that will be displayed. If there were no videos then the trailer_url will be set to None
     try:
         trailer_link = f"https://www.youtube.com/embed/{random.choice(possible_videos)['key']}"
     except IndexError:
         trailer_link = None
+
+    # Get the reviews of the selected movie
     reviews_info = get_movie_reviews(initial_movie["id"])
     reviews = []
     if len(reviews_info) > 0:
@@ -52,77 +82,33 @@ def landing_page():
                 reviews.append([review["author"], f"{endpoint_propic}{review['author_details']['avatar_path']}", review["author_details"]["rating"], review["content"]])
     else:
         pass
-    jw_movie_details = get_justwatch_movie_details(movie)
-    try:
-        release_year = jw_movie_details["original_release_year"]
-    except TypeError:
-        release_year = "No Release Year"
-    offers = {}
-    imdb_score = ""
-    all_offers = jw_movie_details["offers"]
-    for score in jw_movie_details["scoring"]:
-        if "imdb:score" in score.values():
-            imdb_score = score["value"]
-    for offer in all_offers:
-        if offer["provider_id"] in providers:
-            if offer["provider_id"] == 8:
-                offers["https://images.justwatch.com/icon/207360008/s100"] = offer["urls"]["standard_web"]
-            elif offer["provider_id"] == 10 or offer["provider_id"] == 119:
-                offers["https://www.justwatch.com/images/icon/52449861/s100"] = offer["urls"]["standard_web"]
-            else:
-                offers["https://www.justwatch.com/images/icon/899642/s100"] = offer["urls"]["standard_web"]
-            
-    
 
-    if request.method == "POST":
-        movies = get_popular_movies()
-        rand_movie = random.choice(movies)
-        movie = rand_movie["title"]
-        img_url = f"{endpoint_poster}{rand_movie['poster_path']}"
-        details = get_movie_details(rand_movie["id"])
-        duration = details["runtime"]
-        video_info = get_movie_trailer(rand_movie["id"])
-        possible_videos = []
-        for vid in video_info:
-            possible_videos.append(vid)
-        try:
-            trailer_link = f"https://www.youtube.com/embed/{random.choice(possible_videos)['key']}"
-        except:
-            trailer_link = None
-        reviews_info = get_movie_reviews(rand_movie["id"])
-        reviews = []
-        if len(reviews_info) > 0:
-            for review in reviews_info:
-                if review["author_details"]["avatar_path"] is None:
-                    reviews.append([review["author"], "https://i.stack.imgur.com/ZQT8Z.png", review["author_details"]["rating"], review["content"]])
-                elif "gravatar" in review["author_details"]["avatar_path"]:
-                    reviews.append([review["author"], review["author_details"]["avatar_path"][1:], review["author_details"]["rating"], review["content"]])
-                else:
-                    reviews.append([review["author"], f"{endpoint_propic}{review['author_details']['avatar_path']}", review["author_details"]["rating"], review["content"]])
-        else:
-            pass
-        jw_movie_details = get_justwatch_movie_details(movie)
-        try:
-            release_year = jw_movie_details["original_release_year"]
-        except TypeError:
-            release_year = "No Release Year"
-        offers = {}
+    jw_movie_details = get_justwatch_movie_details(movie)
+    if jw_movie_details is not None:
         imdb_score = ""
-        all_offers = jw_movie_details["offers"]
         for score in jw_movie_details["scoring"]:
             if "imdb:score" in score.values():
-                imdb_score = score["value"]
-        all_offers = jw_movie_details["offers"]
-        for offer in all_offers:
-            if offer["provider_id"] in providers:
-                if offer["provider_id"] == 8:
-                    offers["https://images.justwatch.com/icon/207360008/s100"] = offer["urls"]["standard_web"]
-                elif offer["provider_id"] == 10 or offer["provider_id"] == 119:
-                    offers["https://www.justwatch.com/images/icon/52449861/s100"] = offer["urls"]["standard_web"]
-                else:
-                    offers["https://www.justwatch.com/images/icon/899642/s100"] = offer["urls"]["standard_web"]
-
-    return render_template("home.html", movie=movie, img_url=img_url, duration=duration, trailer_link=trailer_link, reviews=reviews, offers=offers, release_year=release_year, imdb_score=imdb_score)
+                imdb_score = str(score["value"])
+                if len(imdb_score) == 1:
+                    imdb_score = f"{imdb_score}.0"
+        try:
+            all_offers = jw_movie_details["offers"]
+            offers = {}
+            for offer in all_offers:
+                if offer["provider_id"] in providers:
+                    if offer["provider_id"] == 8:
+                        offers["https://images.justwatch.com/icon/207360008/s100"] = offer["urls"]["standard_web"]
+                    elif offer["provider_id"] == 10 or offer["provider_id"] == 119:
+                        offers["https://www.justwatch.com/images/icon/52449861/s100"] = offer["urls"]["standard_web"]
+                    else:
+                        offers["https://www.justwatch.com/images/icon/899642/s100"] = offer["urls"]["standard_web"]
+        except KeyError:
+            offers = None
+    else:
+        offers = None
+        imdb_score = None
+    
+    return render_template("home.html", movie=movie, img_url=img_url, duration=duration, trailer_link=trailer_link, reviews=reviews, release_year=release_year, genres=genres, offers=offers, imdb_score=imdb_score)
 
 
 @app.errorhandler(404)

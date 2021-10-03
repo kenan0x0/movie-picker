@@ -21,33 +21,41 @@
             
 
             <div id="query-results">
+                <!-- Movie Name and Poster -->
                 <div class="res-item">
                     <p class="heading-res">{{movie}}</p>
                     <img class="poster" src="{{img_url}}" alt="Movie Poster">
                 </div>
 
+                <!-- Movie Duration -->
                 <div class="res-item">
                     <p class="heading-res">Duration</p>
                     <span class="duration">{{duration}}</span>
                 </div>
 
-
+                <!-- Movie Release Year -->
                 <div class="res-item">
                     <p class="heading-res">Release Year</p>
                     <span class="duration">{{release_year}}</span>
                 </div>
 
 
+                <!-- Movie Watch Providers. Netflix, Prime Video and Pathé comes from JustWatch -->
                 <div class="res-item">
                     <p class="heading-res">Watch Providers</p>
-                    <ul class="providers-list">
-                        {% for provider in offers.items() %}
-                            <li><a href="{{provider[1]}}"><img class="prov-pic" src="{{provider[0]}}"></a></li>
-                        {% endfor %}
-                    </ul>
+                        {% if offers is not none and (offers | length) != 0 %}
+                            <ul class="providers-list">
+                                {% for provider in offers.items() %}
+                                    <li><a href="{{provider[1]}}"><img class="prov-pic" src="{{provider[0]}}"></a></li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span class="duration" style="text-align: center; font-size: 4rem;">No Providers</span>
+                        {% endif %}
                 </div>
 
 
+                <!-- Movie Trailer. YouTube embed clip -->
                 <div class="res-item" style="width: 50%;">
                     <p class="heading-res">Trailer</p>
                     {% if trailer_link is none %}
@@ -60,13 +68,31 @@
                 </div>
 
 
-                <div class="res-item" style="width: 50%;">
+                <!-- Movie IMDB Rating. Comes from JustWatch -->
+                <div class="res-item" style="width: 25%;">
                     <p class="heading-res">Rating</p>
-                    <span class="duration">{{imdb_score}}</span>
+                    {% if imdb_score is not none %}
+                        <span class="duration">{{imdb_score}}</span>
+                    {% else %}
+                    <span class="duration" style="text-align: center; font-size: 5rem;">No Rating</span>
+                    {% endif %}
                 </div>
 
+
+                <!-- Movie Genres -->
+                <div class="res-item" style="width: 25%;">
+                    <p class="heading-res">Genres</p>
+                    <ul class="gen-list">
+                        {% for genre in genres %}
+                            <li style="font-size: 3rem; color: white;">{{genre}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
+                <!-- Movie Reviews -->
                 <div class="res-item" style="width: 100%;">
-                    <p class="heading-res">Reviews</p>
+                    <p class="heading-res">User Reviews</p>
                      <div id="reviews-box">
                         {% if (reviews | length) == 0 %}
                             <span class="duration" style="text-align: center; font-size: 5rem;">No Reviews</span>
