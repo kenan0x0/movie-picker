@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Movie Picker</title>
 </head>
 <body>
  
-    <h1 id="title">Movie Picker App</h1>
+    <!-- <h1 id="title">Movie Picker App</h1> -->
 
     <div id="container">
             
@@ -30,6 +31,23 @@
                     <span class="duration">{{duration}}</span>
                 </div>
 
+
+                <div class="res-item">
+                    <p class="heading-res">Release Year</p>
+                    <span class="duration">{{release_year}}</span>
+                </div>
+
+
+                <div class="res-item">
+                    <p class="heading-res">Watch Providers</p>
+                    <ul class="providers-list">
+                        {% for provider in offers.items() %}
+                            <li><a href="{{provider[1]}}"><img class="prov-pic" src="{{provider[0]}}"></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
                 <div class="res-item" style="width: 50%;">
                     <p class="heading-res">Trailer</p>
                     {% if trailer_link is none %}
@@ -41,8 +59,14 @@
                     {% endif %}
                 </div>
 
+
+                <div class="res-item" style="width: 50%;">
+                    <p class="heading-res">Rating</p>
+                    <span class="duration">{{imdb_score}}</span>
+                </div>
+
                 <div class="res-item" style="width: 100%;">
-                    <p class="heading-res" style="text-align: left;">Reviews</p>
+                    <p class="heading-res">Reviews</p>
                      <div id="reviews-box">
                         {% if (reviews | length) == 0 %}
                             <p>No Reviews</p>
@@ -60,12 +84,7 @@
                         {% endif %}
                      </div>
                 </div>
-
             </div>
-        
-    </div>
-
-
-    
+    </div> 
 </body>
 </html>

@@ -47,6 +47,22 @@ def get_movie_reviews(id):
     return requests.get(url=ENDPOINT_API_MOVIE_DETAILS, headers=headers).json()["results"]
 
 
+def get_justwatch_movie_details(movie_name):
+    ENDPOINT_JUSTWATCH_API = 'https://apis.justwatch.com/content/titles/en_NL/popular?language=en&body={"page_size":5,"page":1,"query":"' + movie_name + '","content_types":["movie"]}'
+    movie_info = []
+    req_movie_justwatch = requests.get(url=ENDPOINT_JUSTWATCH_API).json()["items"]
+    for item in req_movie_justwatch:
+        if movie_name == item["title"]:
+            movie_info.append(item)
+        else:
+            pass
+    
+    if not movie_info:
+        return None
+    else:
+        return movie_info[0]
+
+
 # Function that gets all movie genres with their ids
 # def get_all_genres():
 #     headers = {"Authorization":f"Bearer {access_token}"}
