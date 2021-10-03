@@ -13,7 +13,7 @@ def get_popular_movies():
 
     all_movies = []
     
-    for i in range(20):
+    for i in range(100):
         params = {
             "language":"en-US",
             "page": i+1

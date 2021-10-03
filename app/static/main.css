@@ -40,6 +40,7 @@ hr{
     width: 20%;
     font-size: 16px;
     font-weight: 600;
+    font-family: inherit;
     color: #fff;
     cursor: pointer;
     margin: 20px;
@@ -123,16 +124,24 @@ hr{
 }
 
 /* Style for each review box */
+
+.card::-webkit-scrollbar{
+    display: none;
+}
+
 .card {
-    background: #fff;
-    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
     display: inline-block;
     height: 300px;
+    width: 28.7%;
     margin: 1rem;
     position: relative;
-    width: 300px;
+    
     overflow: scroll;
     padding: 0.5rem;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
   }
 
 
