@@ -21,8 +21,11 @@ endpoint_propic = "https://www.themoviedb.org/t/p/w150_and_h150_face"
 8 is NETFLIX
 10 && 119 are AMAZON PRIME VIDEO
 71 is PATHE
+2 is APPLE'S ITUNES
+337 is DINSEY
+35 is RAKUTEN
 '''
-providers = [8, 10, 119, 72]
+providers = [8, 10, 119, 72, 2, 337, 35]
 
 @app.route("/", methods=["POST", "GET"])
 def landing_page():
@@ -48,9 +51,10 @@ def landing_page():
 
     # Get the release year
     release_date = details["release_date"]
-    print(release_date)
-    print(type(release_date))
-    release_year = release_date[0:release_date.index("-")]
+    try:
+        release_year = release_date[0:release_date.index("-")]
+    except ValueError:
+        release_year = None
 
     # Get the genres of the selected movie and add them to a list
     genres = []
@@ -100,6 +104,12 @@ def landing_page():
                         offers["https://images.justwatch.com/icon/207360008/s100"] = offer["urls"]["standard_web"]
                     elif offer["provider_id"] == 10 or offer["provider_id"] == 119:
                         offers["https://www.justwatch.com/images/icon/52449861/s100"] = offer["urls"]["standard_web"]
+                    elif offer["provider_id"] == 2:
+                        offers["https://images.justwatch.com/icon/190848813/s100"] = offer["urls"]["standard_web"]
+                    elif offer["provider_id"] == 337:
+                        offers["https://www.justwatch.com/images/icon/147638351/s100"] = offer["urls"]["standard_web"]
+                    elif offer["provider_id"] == 35:
+                        offers["https://images.justwatch.com/icon/128599720/s100"] = offer["urls"]["standard_web"]
                     else:
                         offers["https://www.justwatch.com/images/icon/899642/s100"] = offer["urls"]["standard_web"]
         except KeyError:

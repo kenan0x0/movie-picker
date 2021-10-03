@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://kit.fontawesome.com/269be7f06a.js" crossorigin="anonymous"></script>
     <title>Movie Picker</title>
 </head>
 <body>
@@ -36,7 +37,11 @@
                 <!-- Movie Release Year -->
                 <div class="res-item">
                     <p class="heading-res">Release Year</p>
-                    <span class="duration">{{release_year}}</span>
+                    {% if release_year is not none %}
+                        <span class="duration">{{release_year}}</span>
+                    {% else %}
+                    <span class="duration" style="text-align: center; font-size: 4rem;">No Release Year</span>
+                    {% endif %}
                 </div>
 
 
@@ -103,7 +108,7 @@
                                         <img class="propic" src="{{review[1]}}" alt="profile pic of {{review[0]}}">
                                         <p class="username">{{review[0]}}</p>
                                     </div>
-                                    <p>Rating of {{review[0]}}: {{review[2]}}</p>
+                                    <p class="rating"><i style="color: gold !important;" class="fas fa-star fa-sm"></i> {{review[2]}}</p>
                                     <p>{{review[3]}}</p>
                                 </div>
                             {% endfor %}

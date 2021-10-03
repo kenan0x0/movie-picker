@@ -182,3 +182,17 @@ hr{
     height: 50px;
     padding-top: 5px;
 }
+
+
+.rating{
+    color: white;
+    background-color: black;
+    width: 16%;
+    text-align: center;
+    padding: 2px;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 10px;
+}

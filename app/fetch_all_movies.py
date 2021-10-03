@@ -4,13 +4,15 @@ import pickle
 
 ENTRYPOINT_API_MOVIE_POPULAR = "https://api.themoviedb.org/3/movie/popular"
 
+# Max is 500 pages for future reference
+
 # Important functions
 def get_popular_movies():
     headers = {"Authorization":f"Bearer {os.environ.get('ACCESS_TOKEN')}"}
 
     all_movies = []
     
-    for i in range(500):
+    for i in range(50):
         params = {
             "language":"en-US",
             "page": i+1
