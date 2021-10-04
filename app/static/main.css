@@ -37,7 +37,7 @@ hr{
 
 /* Style of the cool button */
 .btn-hover {
-    width: 20%;
+    width: 45%;
     font-size: 16px;
     font-weight: 600;
     font-family: inherit;
@@ -195,4 +195,17 @@ hr{
     top: 0;
     right: 0;
     margin-right: 10px;
+}
+
+
+/* list for sharing on social media */
+
+.list-social-media{
+    list-style-type: none;
+}
+.list-social-media li{
+    display: inline-block;
+}
+.platform i{
+    color: white;
 }

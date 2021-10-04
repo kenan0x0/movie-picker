@@ -1,5 +1,6 @@
 from flask import Flask, url_for, redirect, render_template, request
 import os
+import subprocess
 import random
 from utils import (
     # get_popular_movies,
@@ -14,6 +15,7 @@ app.debug = True
 app.config["SECRET_KEY"] = os.environ.get("SEC_KEY")
 endpoint_poster = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
 endpoint_propic = "https://www.themoviedb.org/t/p/w150_and_h150_face"
+website_url = subprocess.run(['gp', 'url', '5000'], stdout=subprocess.PIPE).stdout.decode('utf-8')
 
 # Note to self
 # Provider IDS in JUSTWATCH
@@ -118,7 +120,7 @@ def landing_page():
         offers = None
         imdb_score = None
     
-    return render_template("home.html", movie=movie, img_url=img_url, duration=duration, trailer_link=trailer_link, reviews=reviews, release_year=release_year, genres=genres, offers=offers, imdb_score=imdb_score)
+    return render_template("home.html", movie=movie, img_url=img_url, duration=duration, trailer_link=trailer_link, reviews=reviews, release_year=release_year, genres=genres, offers=offers, imdb_score=imdb_score, website_url=website_url)
 
 
 @app.errorhandler(404)
