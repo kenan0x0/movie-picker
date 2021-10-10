@@ -17,10 +17,17 @@ endpoint_poster = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
 endpoint_propic = "https://www.themoviedb.org/t/p/w150_and_h150_face"
 website_url = subprocess.run(['gp', 'url', '5000'], stdout=subprocess.PIPE).stdout.decode('utf-8')
 
-
+# Note to self
 # Provider IDS in JUSTWATCH
+'''
+8 is NETFLIX
+10 && 119 are AMAZON PRIME VIDEO
+71 is PATHE
+2 is APPLE'S ITUNES
+337 is DINSEY
+35 is RAKUTEN
+'''
 providers = [8, 10, 119, 72, 2, 337, 35]
-
 
 @app.route("/", methods=["POST", "GET"])
 def landing_page():
