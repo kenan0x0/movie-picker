@@ -97,6 +97,7 @@ def landing_page():
                 imdb_score = str(score["value"])
                 if len(imdb_score) == 1:
                     imdb_score = f"{imdb_score}.0"
+            imdb_score = imdb_score.replace(".", "")
         try:
             all_offers = jw_movie_details["offers"]
             offers = {}
