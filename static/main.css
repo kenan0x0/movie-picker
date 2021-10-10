@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@600&display=swap');
 /* Style of the entire page */
 html{
-    font-family: 'Gemunu Libre', sans-serif;
-    /* background-color: #272727; */
-    background: rgb(54,36,22);
-    background: linear-gradient(0deg, rgba(54,36,22,1) 0%, rgba(254,189,63,1) 100%);
+  font-family: 'Gemunu Libre', sans-serif;
+  background: rgb(250,228,210);
+  background: radial-gradient(circle, rgba(250,228,210,1) 0%, rgba(254,189,63,1) 100%);
 }
 
 /* Style of the container that includes all elements */
@@ -204,25 +203,8 @@ hr{
     margin-right: 10px;
 }
 
-
-/* list for sharing on social media */
-
-.list-social-media{
-    /* width: 5.5em; */
-    display: flex;
-    flex-direction: row;
-    /* background-color: white; */
-    /* border-radius: 12px; */
-    /* position: absolute; */
-    /* top: 20px; */
-    /* right: 20px; */
-    justify-content: center;
-    padding: 20px;
-}
-
 .platform .facebook{
     color: #0572e6;
-    margin-left: 5px;
 }
 
 .platform .twitter{
@@ -238,44 +220,65 @@ hr{
 
 
 /* Progress charts */
-  .circular-chart {
-    display: block;
-    margin: 10px auto;
-    max-width: 80%;
-    max-height: 250px;
-  }
-  
-  .circle-bg {
-    fill: none;
-    stroke: #eee;
-    stroke-width: 3.8;
-  }
-  
-  .circle {
-    fill: none;
-    stroke-width: 2.8;
-    stroke-linecap: round;
-    animation: progress 1s ease-out forwards;
-  }
-  
-  @keyframes progress {
-    0% {
-      stroke-dasharray: 0 100;
-    }
-  }
-  
-  .circular-chart.blue .circle {
-    stroke: #0080ff;
-  }
-  
-  .percentage {
-    fill: white;
-    font-size: 0.5em;
-    text-anchor: middle;
-  }
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  max-height: 250px;
+}
 
-.page-footer{
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.blue .circle {
+  stroke: #0080ff;
+}
+
+.percentage {
+  fill: white;
+  font-size: 0.5em;
+  text-anchor: middle;
+}
+
+.container-social-media{
     background-color: white;
+    display: flex;
+    flex-direction: column;
     border-radius: 12px;
-    margin: 20px;
+    padding: 10px;
+    position: fixed;
+    top: 8px;
+    right: 20px;
+}
+
+
+/* back to top button */
+#topBtn {
+  display: none;
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
 }
