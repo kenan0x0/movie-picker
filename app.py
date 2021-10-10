@@ -33,7 +33,7 @@ providers = [8, 10, 119, 72, 2, 337, 35]
 def landing_page():
 
     # Get all the popular movies
-    with open('app/all_movies.pkl', 'rb') as f:
+    with open('all_movies.pkl', 'rb') as f:
         all_popular = pickle.load(f)
 
     # Select the initial movie to display
@@ -130,4 +130,4 @@ def resource_not_found(e):
     return f"404, {path} not found!", 404
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=5000)

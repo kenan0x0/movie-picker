@@ -1,10 +1,10 @@
 tasks:
   - init: pip install -r requirements.txt
-    command: python app/app.py
+    command: python app.py
 
 
 ports:
-  - port: 80
+  - port: 5000
   
 vscode:
   extensions:
