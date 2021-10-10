@@ -4,7 +4,7 @@ tasks:
 
 
 ports:
-  - port: 5000
+  - port: 80
   
 vscode:
   extensions:
