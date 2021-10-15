@@ -15,7 +15,11 @@ app.debug = True
 app.config["SECRET_KEY"] = os.environ.get("SEC_KEY")
 endpoint_poster = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2"
 endpoint_propic = "https://www.themoviedb.org/t/p/w150_and_h150_face"
-website_url = subprocess.run(['gp', 'url', '5000'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+website_url = None
+try:
+    website_url = subprocess.run(['gp', 'url', '5000'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+except:
+    website_url = "https://rand-movie-picker.herokuapp.com/"
 
 # Note to self
 # Provider IDS in JUSTWATCH
